@@ -1,16 +1,19 @@
+# phylocalcgui.py
+
 import sys
 import time
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QWidget,
-                             QPushButton, QLabel, QFileDialog, QTableWidget,
-                             QTableWidgetItem, QMessageBox)
+                             QPushButton, QLabel, QFileDialog, QDoubleSpinBox,
+                             QMessageBox, QTableWidget, QTableWidgetItem)
 from phylocalc import Tree, Q
+import numpy as np
 
 
 class PhyloCalcGUI(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("PhyloCalc GUI")
-        self.setGeometry(100, 100, 600, 400)
+        self.setGeometry(100, 100, 600, 600)
 
         self.table_file = None
         self.msa_file = None
@@ -23,6 +26,7 @@ class PhyloCalcGUI(QMainWindow):
 
         self.add_file_buttons()
         self.add_matrix_editor()
+        self.add_matrix_display()
         self.add_run_section()
 
     def add_file_buttons(self):
@@ -63,28 +67,43 @@ class PhyloCalcGUI(QMainWindow):
                 self.branch_path_display.setText(f"Branch Length File: {file_path}")
 
     def add_matrix_editor(self):
+        self.layout.addWidget(QLabel("Set value for µ in Q Matrix:"))
+
+        self.x_input = QDoubleSpinBox()
+        self.x_input.setRange(0.0, 10.0)
+        self.x_input.setDecimals(4)
+        self.x_input.setSingleStep(0.01)
+        self.x_input.setValue(0.1875)
+        self.x_input.valueChanged.connect(self.update_Q_matrix)
+
+        self.layout.addWidget(self.x_input)
+
+    def add_matrix_display(self):
+        self.matrix_display_label = QLabel("Q Matrix:")
+        self.layout.addWidget(self.matrix_display_label)
+
         self.q_table = QTableWidget(4, 4)
-        self.q_table.setHorizontalHeaderLabels(['A', 'C', 'G', 'T'])
-        self.q_table.setVerticalHeaderLabels(['A', 'C', 'G', 'T'])
-
-        for i in range(4):
-            for j in range(4):
-                item = QTableWidgetItem(str(self.Q_matrix[i, j]))
-                self.q_table.setItem(i, j, item)
-
-        self.layout.addWidget(QLabel("Edit Q Matrix:"))
+        self.q_table.setHorizontalHeaderLabels(["A", "C", "G", "T"])
+        self.q_table.setVerticalHeaderLabels(["A", "C", "G", "T"])
+        self.q_table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)  # Make the table non-editable
         self.layout.addWidget(self.q_table)
 
+        self.update_Q_matrix()
+
     def update_Q_matrix(self):
+        # Update the matrix based on x
+        x = self.x_input.value()
+        self.Q_matrix = np.array([
+            [-3 * x, x, x, x],
+            [x, -3 * x, x, x],
+            [x, x, -3 * x, x],
+            [x, x, x, -3 * x]
+        ])
+
+        # Update the Q table with the new matrix values
         for i in range(4):
             for j in range(4):
-                item = self.q_table.item(i, j)
-                try:
-                    self.Q_matrix[i, j] = float(item.text())
-                except ValueError:
-                    QMessageBox.warning(self, "Invalid Input", f"Invalid value in Q matrix at ({i}, {j}).")
-                    return False
-        return True
+                self.q_table.setItem(i, j, QTableWidgetItem(f"{self.Q_matrix[i, j]:.4f}"))
 
     def add_run_section(self):
         self.run_btn = QPushButton("Run Phylogenetic Calculation")
@@ -100,9 +119,6 @@ class PhyloCalcGUI(QMainWindow):
     def run_calculation(self):
         if not all([self.table_file, self.msa_file, self.branch_file]):
             QMessageBox.warning(self, "Missing Files", "Please load all data files before running the calculation.")
-            return
-
-        if not self.update_Q_matrix():
             return
 
         start_time = time.time()
