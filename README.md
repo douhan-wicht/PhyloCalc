@@ -24,3 +24,8 @@ flowchart TD
     H --> I["Calculate Probability of correct alignment for a given mutation rate"]
 
 ```
+
+## Monday 11.11.2024 - Code Versioning
+
+The algorithm is located in phylocalc.py but can be accessed graphically by launching the phylocalcgui.py.
+
