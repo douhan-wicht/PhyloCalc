@@ -5,9 +5,9 @@ PhyloCalc is a custom Python module designed to calculate the probability of a p
 
 ## Key Features
 - **Phylogenetic Tree Probability Calculation**: PhyloCalc computes the likelihood of a phylogenetic tree based on given DNA sequences, tree structure, and branch lengths. It also predicts the most probable nucleotide mutation rates.
-- **FASTA File Integration**: The module supports FASTA file input, allowing users to seamlessly incorporate their DNA sequence data.
+- **FASTA File Integration**: The module supports FASTA file input, allowing users to seamlessly incorporate their DNA sequence data. [WIP]
 - **Tree Structure Parsing**: PhyloCalc can interpret tree structures in tabular format, facilitating compatibility with various tree representations.
-- **Visualization**: PhyloCalc can generate visualizations of phylogenetic trees, providing a clearer view of evolutionary relationships.
+- **Visualization**: PhyloCalc can generate visualizations of phylogenetic trees, providing a clearer view of evolutionary relationships. [WIP]
 
 ## Friday 09.11.2024 - Preliminary Step: Overview of the Project
 
