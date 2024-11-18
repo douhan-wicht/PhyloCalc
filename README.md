@@ -4,10 +4,13 @@
 PhyloCalc is a custom Python module designed to calculate the probability of a phylogenetic tree, accounting for varying nucleotide substitution probabilities. Developed for the Advanced Python Programming Course in the University of Lausanne’s first-year Master of Molecular Life Sciences program, PhyloCalc operates independently of the Biopython library.
 
 ## Key Features
-- **Phylogenetic Tree Probability Calculation**: PhyloCalc computes the likelihood of a phylogenetic tree based on given DNA sequences, tree structure, and branch lengths. It also predicts the most probable nucleotide mutation rates.
-- **FASTA File Integration**: The module supports FASTA file input, allowing users to seamlessly incorporate their DNA sequence data. [WIP]
-- **Tree Structure Parsing**: PhyloCalc can interpret tree structures in tabular format, facilitating compatibility with various tree representations.
-- **Visualization**: PhyloCalc can generate visualizations of phylogenetic trees, providing a clearer view of evolutionary relationships. [WIP]
+- **Phylogenetic Tree Probability Calculation**: PhyloCalc computes the likelihood of a phylogenetic tree based on given DNA sequences, tree structure, and branch lengths. ✅
+- **Tree Structure Parsing**: PhyloCalc can interpret tree structures in tabular format, facilitating compatibility with various tree representations. ✅
+- **Visualization**: PhyloCalc can generate visualizations of phylogenetic trees, providing a clearer view of evolutionary relationships. ✅
+
+## Roadmap
+- **FASTA File Integration**: The module supports FASTA file input, allowing users to seamlessly incorporate their DNA sequence data. [WIP] 🤔
+
 
 ## Friday 09.11.2024 - Preliminary Step: Overview of the Project
 
@@ -27,5 +30,4 @@ flowchart TD
 
 ## Monday 11.11.2024 - Code Versioning
 
-The algorithm is located in phylocalc.py but can be accessed graphically by launching the phylocalcgui.py.
-
+The algorithm responsible for creating the `Tree` object and calculating the log-likelihood is located in `phylocalc.py`. It can be accessed easily through the graphical interface by running the `phylocalcgui.py` script. Additionally, the method for visualizing the tree using NetworkX is implemented in `tree_visualization.py` and is imported into the GUI. If the required packages are installed, the tree will be displayed in a pop-up window for the user.
