@@ -3,6 +3,7 @@ import time
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QWidget,
                              QPushButton, QLabel, QFileDialog, QDoubleSpinBox,
                              QMessageBox, QTableWidget, QTableWidgetItem)
+from phylocalc import Tree, Q
 from tree_visualization import TreeVisualization  # Import the tree visualization popup class
 import numpy as np
 
@@ -16,7 +17,7 @@ class PhyloCalcGUI(QMainWindow):
         self.table_file = None
         self.msa_file = None
         self.branch_file = None
-        self.Q_matrix = np.zeros((4, 4))
+        self.Q_matrix = Q.copy()
 
         self.main_widget = QWidget()
         self.setCentralWidget(self.main_widget)
@@ -123,9 +124,8 @@ class PhyloCalcGUI(QMainWindow):
         start_time = time.time()
 
         try:
-            # Simulating some calculation
-            time.sleep(1)  # Simulated delay
-            log_likelihood = -123.456  # Example log likelihood
+            tree = Tree(self.table_file, self.msa_file, self.branch_file, self.Q_matrix)
+            log_likelihood = tree.get_log_likelihood()
         except Exception as e:
             QMessageBox.critical(self, "Error", f"An error occurred during calculation: {e}")
             return
