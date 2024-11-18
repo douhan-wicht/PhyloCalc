@@ -140,9 +140,21 @@ class PhyloCalcGUI(QMainWindow):
         self.layout.addWidget(self.tree_viewer_btn)
 
     def show_tree_viewer(self):
-        tree_viewer = TreeVisualization(self)
-        tree_viewer.exec()
+        # Ensure all necessary files are loaded
+        if not all([self.table_file, self.msa_file, self.branch_file]):
+            QMessageBox.warning(self, "Missing Files", "Please load all data files before viewing the tree.")
+            return
 
+        try:
+            # Use the Tree class to process the files and generate the tree structure
+            tree = Tree(self.table_file, self.msa_file, self.branch_file, self.Q_matrix)
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"An error occurred while creating the tree: {e}")
+            return
+
+        # Pass the generated tree to the TreeVisualization class for display
+        tree_viewer = TreeVisualization(tree, self)
+        tree_viewer.exec()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
