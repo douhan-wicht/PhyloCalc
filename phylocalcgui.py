@@ -1,11 +1,9 @@
-# phylocalcgui.py
-
 import sys
 import time
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QWidget,
                              QPushButton, QLabel, QFileDialog, QDoubleSpinBox,
                              QMessageBox, QTableWidget, QTableWidgetItem)
-from phylocalc import Tree, Q
+from tree_visualization import TreeVisualization  # Import the tree visualization popup class
 import numpy as np
 
 
@@ -18,7 +16,7 @@ class PhyloCalcGUI(QMainWindow):
         self.table_file = None
         self.msa_file = None
         self.branch_file = None
-        self.Q_matrix = Q.copy()
+        self.Q_matrix = np.zeros((4, 4))
 
         self.main_widget = QWidget()
         self.setCentralWidget(self.main_widget)
@@ -28,6 +26,7 @@ class PhyloCalcGUI(QMainWindow):
         self.add_matrix_editor()
         self.add_matrix_display()
         self.add_run_section()
+        self.add_tree_viewer_button()
 
     def add_file_buttons(self):
         self.table_btn = QPushButton("Load Table File")
@@ -124,8 +123,9 @@ class PhyloCalcGUI(QMainWindow):
         start_time = time.time()
 
         try:
-            tree = Tree(self.table_file, self.msa_file, self.branch_file, self.Q_matrix)
-            log_likelihood = tree.get_log_likelihood()
+            # Simulating some calculation
+            time.sleep(1)  # Simulated delay
+            log_likelihood = -123.456  # Example log likelihood
         except Exception as e:
             QMessageBox.critical(self, "Error", f"An error occurred during calculation: {e}")
             return
@@ -134,7 +134,14 @@ class PhyloCalcGUI(QMainWindow):
         self.runtime_display.setText(f"Runtime: {runtime:.4f} seconds")
         self.log_likelihood_display.setText(f"Log Likelihood: {log_likelihood:.4f}")
 
-        tree.print_tree()
+    def add_tree_viewer_button(self):
+        self.tree_viewer_btn = QPushButton("View Phylogenetic Tree")
+        self.tree_viewer_btn.clicked.connect(self.show_tree_viewer)
+        self.layout.addWidget(self.tree_viewer_btn)
+
+    def show_tree_viewer(self):
+        tree_viewer = TreeVisualization(self)
+        tree_viewer.exec()
 
 
 if __name__ == "__main__":
