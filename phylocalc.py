@@ -108,8 +108,7 @@ class Tree:
 
     def get_log_likelihood(self):
         eq_freq = np.array([0.25, 0.25, 0.25, 0.25])
-        root_sequence_log = np.log(np.clip(self.root.sequence, 1e-10, None))
-        log_likelihood = np.sum(root_sequence_log * eq_freq)
+        log_likelihood = np.sum(np.log(np.matmul(self.root.sequence, eq_freq)))
         return float(log_likelihood)
 
     def print_tree(self, node=None, level=0):
