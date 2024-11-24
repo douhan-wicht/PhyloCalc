@@ -53,7 +53,7 @@ flowchart TD
 - Python 3.12 or higher
 - Required packages:  
   ```bash
-  pip install pyqt6 networkx numpy
+  pip install pyqt6 networkx numpy pandas scipy matplotlib
   ```
 
 ### Get Started
