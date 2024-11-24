@@ -1,4 +1,4 @@
-# ![PhyloCalc](ressources/icon.png){width=50%} PhyloCalc
+# ![PhyloCalc](ressources/header.png) PhyloCalc
 
 ## Overview
 PhyloCalc is a Python module tailored to calculate the probability of phylogenetic trees, considering diverse nucleotide substitution probabilities. This tool was developed as part of the Advanced Python Programming Course at the University of Lausanne’s first-year Master of Molecular Life Sciences program. Importantly, PhyloCalc is designed to function independently of the `Biopython` library, ensuring a custom-built solution for specific phylogenetic analyses.
