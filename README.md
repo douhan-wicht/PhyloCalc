@@ -1,33 +1,75 @@
 # PhyloCalc [WORK IN PROGRESS]
 
-## Introduction
-PhyloCalc is a custom Python module designed to calculate the probability of a phylogenetic tree, accounting for varying nucleotide substitution probabilities. Developed for the Advanced Python Programming Course in the University of Lausanne’s first-year Master of Molecular Life Sciences program, PhyloCalc operates independently of the Biopython library.
+## Overview
+PhyloCalc is a Python module tailored to calculate the probability of phylogenetic trees, considering diverse nucleotide substitution probabilities. This tool was developed as part of the Advanced Python Programming Course at the University of Lausanne’s first-year Master of Molecular Life Sciences program. Importantly, PhyloCalc is designed to function independently of the Biopython library, ensuring a custom-built solution for specific phylogenetic analyses.
+
+---
 
 ## Key Features
-- **Phylogenetic Tree Probability Calculation**: PhyloCalc computes the likelihood of a phylogenetic tree based on given DNA sequences, tree structure, and branch lengths. ✅
-- **Tree Structure Parsing**: PhyloCalc can interpret tree structures in tabular format, facilitating compatibility with various tree representations. ✅
-- **Visualization**: PhyloCalc can generate visualizations of phylogenetic trees, providing a clearer view of evolutionary relationships. ✅
+- **Phylogenetic Tree Likelihood Computation**  
+  PhyloCalc calculates the likelihood of a phylogenetic tree based on DNA sequences, tree structures, and branch lengths. ✅  
+- **Flexible Tree Parsing**  
+  Reads tree structures in tabular formats, enhancing compatibility with different data representations. ✅  
+- **Visual Representation**  
+  Generates clear and intuitive visualizations of phylogenetic trees, aiding in the interpretation of evolutionary relationships. ✅  
 
-## Roadmap
-- **FASTA File Integration**: The module supports FASTA file input, allowing users to seamlessly incorporate their DNA sequence data. [WIP] 🤔
+### Upcoming Enhancements
+- **FASTA File Integration**  
+  Allowing direct input of DNA sequences from FASTA files to streamline the workflow. [Work in Progress] 🤔
 
+---
 
-## Friday 09.11.2024 - Preliminary Step: Overview of the Project
+## How It Works
+
+### Workflow Diagram
 
 ```mermaid
 flowchart TD
-    A["Input Tree Table"] --> B{"Parse Data"}
-    A2["Input Branch Length Vector"] --> B
-    A3["FASTA File with Sequences"] --> B
-    B --> D["Create Tree Class with Tree Structure"]
-    D --> F{"Populate Tree Using Node Class"}
-    F --> F1["Assign Node Identity"] & F2["Assign Parent Attribute"] & F3["Assign Children Attribute"] & F4["Assign Branch Length to Closest Parent"] & G{"Assign Sequence"}
-    G --> G1["Assign Sequence from FASTA to Final Nodes"] & G2["Calculate Ancestral Sequence for Parent Nodes"]
-    G2 --> H["Populated Tree Structure with Sequence Alignment"]
-    H --> I["Calculate Probability of correct alignment for a given mutation rate"]
-
+    InputTree["Input Tree Table"] --> ParseData{"Parse Data"}
+    BranchLengths["Input Branch Length Vector"] --> ParseData
+    FASTAFile["FASTA File with Sequences"] --> ParseData
+    ParseData --> CreateTree["Create Tree Class with Tree Structure"]
+    CreateTree --> PopulateTree{"Populate Tree Using Node Class"}
+    PopulateTree --> AssignAttributes["Assign Node Identity, Parent, Children, and Branch Lengths"]
+    AssignAttributes --> AssignSequences{"Assign Sequences"}
+    AssignSequences --> FinalizeTree["Complete Tree with Sequence Alignment"]
+    FinalizeTree --> CalculateProbabilities["Calculate Alignment Probability for a Given Mutation Rate"]
 ```
+## Project Components
 
-## Monday 11.11.2024 - Code Versioning
+### Core Functionalities
+1. **Tree Object Construction**  
+   The core algorithm responsible for building the `Tree` object and calculating the log-likelihood is implemented in the `phylocalc.py` script.  
+2. **Graphical Interface**  
+   A user-friendly interface is provided via `phylocalcgui.py`. This script integrates all functionalities and allows users to interact with the module easily.  
+3. **Tree Visualization**  
+   Implemented in `tree_visualization.py`, the visualization functionality uses NetworkX to display the phylogenetic tree in a pop-up window (requires appropriate packages installed).  
 
-The algorithm responsible for creating the `Tree` object and calculating the log-likelihood is located in `phylocalc.py`. It can be accessed easily through the graphical interface by running the `phylocalcgui.py` script. Additionally, the method for visualizing the tree using NetworkX is implemented in `tree_visualization.py` and is imported into the GUI. If the required packages are installed, the tree will be displayed in a pop-up window for the user.
+---
+
+## Installation and Setup
+
+### Prerequisites
+- Python 3.12 or higher
+- Required packages:  
+  ```bash
+  pip install pyqt6 networkx numpy
+  ```
+
+### Get Started
+1. **Clone the repository**
+    ```bash
+    git clone https://github.com/douhan-wicht/PhyloCalc
+    cd PhyloCalc
+    ```
+2. **Run the GUI**
+   ```bash
+   python phylocalcgui.py
+   ```
+
+---
+
+## Screenshots
+
+![PhyloCalcGUI](ressources/PhyloCalcGUI.png)
+![Tree Visualization Screenshot](ressources/tree_visualization.png)
