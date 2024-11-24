@@ -1,8 +1,10 @@
 import sys
 import time
+import os
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QWidget,
                              QPushButton, QLabel, QFileDialog, QDoubleSpinBox,
                              QMessageBox, QTableWidget, QTableWidgetItem)
+from PyQt6.QtGui import QIcon
 from phylocalc import Tree, Q
 from tree_visualization import TreeVisualization  # Import the tree visualization popup class
 import numpy as np
@@ -12,6 +14,12 @@ class PhyloCalcGUI(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("PhyloCalc GUI")
+
+        # Dynamically determine the path to the icon
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        icon_path = os.path.join(base_dir, "ressources", "icon.png")
+        self.setWindowIcon(QIcon(icon_path))
+
         self.setGeometry(100, 100, 600, 600)
 
         self.table_file = None
@@ -157,7 +165,12 @@ class PhyloCalcGUI(QMainWindow):
         tree_viewer.exec()
 
 if __name__ == "__main__":
+    # Dynamically determine base directory for portability
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    icon_path = os.path.join(base_dir, "ressources", "icon.png")
+
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon(icon_path))
     gui = PhyloCalcGUI()
     gui.show()
     sys.exit(app.exec())
