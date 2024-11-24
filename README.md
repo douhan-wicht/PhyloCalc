@@ -1,4 +1,4 @@
-![PhyloCalc](ressources/header.png)
+![PhyloCalc](ressources/logo.png)
 
 # PhyloCalc
 
