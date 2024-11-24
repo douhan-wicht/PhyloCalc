@@ -72,6 +72,6 @@ flowchart TD
 ## Screenshots
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="ressources/PhyloCalcGUI.png" alt="PhyloCalcGUI" width="49%" />
-  <img src="ressources/tree_visualization.png" alt="Tree Visualization Screenshot" width="49%" />
+  <img src="ressources/PhyloCalcGUI.png" alt="PhyloCalcGUI" width="59%" />
+  <img src="ressources/tree_visualization.png" alt="Tree Visualization Screenshot" width="39%" />
 </div>
