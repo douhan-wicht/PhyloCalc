@@ -25,15 +25,15 @@ PhyloCalc is a Python module tailored to calculate the probability of phylogenet
 
 ```mermaid
 flowchart TD
-    InputTree["Input Tree Table"] --> ParseData{"Parse Data"}
-    BranchLengths["Input Branch Length Vector"] --> ParseData
-    FASTAFile["FASTA File with Sequences"] --> ParseData
-    ParseData --> CreateTree["Create Tree Class with Tree Structure"]
-    CreateTree --> PopulateTree{"Populate Tree Using Node Class"}
-    PopulateTree --> AssignAttributes["Assign Node Identity, Parent, Children, and Branch Lengths"]
-    AssignAttributes --> AssignSequences{"Assign Sequences"}
-    AssignSequences --> FinalizeTree["Complete Tree with Sequence Alignment"]
-    FinalizeTree --> CalculateProbabilities["Calculate Alignment Probability for a Given Mutation Rate"]
+    A["Input Tree Table"] --> B{"Parse Data"}
+    A2["Input Branch Length Vector"] --> B
+    A3["FASTA File with Sequences"] --> B
+    B --> D["Create Tree Class with Tree Structure"]
+    D --> F{"Populate Tree Using Node Class"}
+    F --> F1["Assign Node Identity"] & F2["Assign Parent Attribute"] & F3["Assign Children Attribute"] & F4["Assign Branch Length to Closest Parent"] & G{"Assign Sequence"}
+    G --> G1["Assign Sequence from FASTA to Final Nodes"] & G2["Calculate Ancestral Sequence for Parent Nodes"]
+    G2 --> H["Populated Tree Structure with Sequence Alignment"]
+    H --> I["Calculate Probability of correct alignment for a given mutation rate"]
 ```
 ## Project Components
 
