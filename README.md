@@ -50,7 +50,7 @@ flowchart TD
 ## Installation and Setup
 
 ### Prerequisites
-- Python 3.12 or higher
+- Python 3.9 or higher
 - Required packages:  
   ```bash
   pip install pyqt6 networkx numpy pandas scipy matplotlib
