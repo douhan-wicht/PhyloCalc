@@ -88,7 +88,6 @@ class Tree:
             child_value = row['Species']
             sequence_value = row['Sequence']
             data.loc[data['Child'] == child_value, 'Sequence'] = sequence_value
-        print(data)
         return data
 
     def is_final_node(self, node_name):
